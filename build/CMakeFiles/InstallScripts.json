@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/Andrea/Home/dev/pacapalette/build/cmake_install.cmake",
-		"/home/Andrea/Home/dev/pacapalette/build/_deps/nlohmann_json-build/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
