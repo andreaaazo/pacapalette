@@ -1,0 +1,5 @@
+/home/Andrea/Home/dev/pacapalette/build/CMakeFiles/Project.dir
+/home/Andrea/Home/dev/pacapalette/build/CMakeFiles/edit_cache.dir
+/home/Andrea/Home/dev/pacapalette/build/CMakeFiles/rebuild_cache.dir
+/home/Andrea/Home/dev/pacapalette/build/_deps/nlohmann_json-build/CMakeFiles/edit_cache.dir
+/home/Andrea/Home/dev/pacapalette/build/_deps/nlohmann_json-build/CMakeFiles/rebuild_cache.dir

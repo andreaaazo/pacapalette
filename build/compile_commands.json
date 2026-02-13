@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/Andrea/Home/dev/pacapalette/build",
+  "command": "/usr/bin/c++  -I/home/Andrea/Home/dev/pacapalette/include -g -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/Project.dir/src/PaletteGenerator.cpp.o -c /home/Andrea/Home/dev/pacapalette/src/PaletteGenerator.cpp",
+  "file": "/home/Andrea/Home/dev/pacapalette/src/PaletteGenerator.cpp",
+  "output": "CMakeFiles/Project.dir/src/PaletteGenerator.cpp.o"
+}
+]
