@@ -6,7 +6,7 @@
 namespace
 {
 
-static double Fsc(const double Yc)
+static double Fsc(const double& Yc)
 {
     if (Yc < 0.0)
         return 0.0;
@@ -17,7 +17,7 @@ static double Fsc(const double Yc)
     return Yc;
 }
 
-static double calcCw(const double Ybg, const double Ytxt)
+static double calcCw(const double& Ybg, const double& Ytxt)
 {
     if (Ybg > Ytxt)
         return (std::pow(Ybg, Nbg) - std::pow(Ytxt, Ntx)) * Wscale;
@@ -25,7 +25,7 @@ static double calcCw(const double Ybg, const double Ytxt)
     return (std::pow(Ybg, Rbg) - std::pow(Ytxt, Rtx)) * Wscale;
 }
 
-static double calcSapc(const double Cw)
+static double calcSapc(const double& Cw)
 {
     if (std::abs(Cw) < Wclamp)
         return 0.0;
@@ -41,7 +41,7 @@ static double calcSapc(const double Cw)
 namespace Color::APCA
 {
 
-double getContrast(SRGB8 color, SRGB8 backgroundColor)
+double getContrast(const SRGB8& color, const SRGB8& backgroundColor)
 {
     double YsColor = Conversion::toYs(color);
     double YsBackgroundColor = Conversion::toYs(backgroundColor);

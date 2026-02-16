@@ -57,25 +57,15 @@ else()
 endif()
 
 # ---------------------
-# External Dependencies
+# Find source files
 # ---------------------
-include(FetchContent)
-
-message(STATUS "Fetching dependencies...")
-
-# nlohmann/json
-FetchContent_Declare(
-    nlohmann_json
-    GIT_REPOSITORY https://github.com/nlohmann/json.git
-    GIT_TAG v3.12.0
-)
-
-FetchContent_MakeAvailable(nlohmann_json)
+file(GLOB_RECURSE LIB_SOURCES "src/*.cpp")
+list(FILTER LIB_SOURCES EXCLUDE REGEX "src/main.cpp")
 
 # ---------------------
 # Add Library
 # ---------------------
-add_library(${PROJECT_NAME} STATIC src/PaletteGenerator.cpp)
+add_library(${PROJECT_NAME} STATIC ${LIB_SOURCES})
 
 target_include_directories(
     ${PROJECT_NAME}
@@ -85,3 +75,7 @@ target_include_directories(
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+
+add_executable(Playground src/main.cpp)
+
+target_link_libraries(Playground PRIVATE ${PROJECT_NAME})

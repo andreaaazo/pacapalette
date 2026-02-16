@@ -5,6 +5,6 @@
 namespace Color::Utils
 {
 
-bool isInGamut(OKLCH color);
+bool isInGamut(const OKLCH& color);
 
 }

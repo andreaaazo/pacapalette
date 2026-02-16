@@ -5,5 +5,5 @@
 namespace Color::APCA
 {
 
-double getContrast(SRGB8 color, SRGB8 backgroundColor);
+double getContrast(const SRGB8& color, const SRGB8& backgroundColor);
 }
