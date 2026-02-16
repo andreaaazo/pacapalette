@@ -1,5 +1,7 @@
-
 #pragma once
+
+namespace Color
+{
 
 struct OKLCH
 {
@@ -9,3 +11,5 @@ struct OKLCH
 
     OKLCH(double l, double c, double h);
 };
+
+} // namespace Color

@@ -1,5 +1,8 @@
 #pragma once
 
+namespace Color
+{
+
 // Structure to represent a linear sRGB color 0.0 to 1.0
 struct LinearSRGB
 {
@@ -10,3 +13,4 @@ struct LinearSRGB
     // Constructor
     LinearSRGB(double r, double g, double b);
 };
+} // namespace Color
