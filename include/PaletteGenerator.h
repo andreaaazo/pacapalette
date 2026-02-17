@@ -20,11 +20,9 @@ private:
     Color::OKLCH backgroundColorOKLCH;
     std::vector<double> contrastSteps;
 
-    double minContrastBound;
-    double maxContrastBound;
     bool searchTowardsLight;
 
     double getMaxContrastAchievable();
-    void calculateContrastBounds();
+    void calculateSearchDirection();
     Color::SRGB8 findColorForContrast(const double& targetContrast);
 };

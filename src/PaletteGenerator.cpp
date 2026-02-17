@@ -14,7 +14,7 @@ PaletteGenerator::PaletteGenerator(Color::SRGB8 color, Color::SRGB8 backgroundCo
       backgroundColorOKLCH(Color::Conversion::toOKLCH(backgroundColor)),
       contrastSteps(contrastSteps)
 {
-    calculateContrastBounds();
+    calculateSearchDirection();
 }
 
 double PaletteGenerator::getMaxContrastAchievable()
@@ -25,75 +25,70 @@ double PaletteGenerator::getMaxContrastAchievable()
     return std::abs(Color::APCA::getContrast(extremeColor, backgroundColor));
 }
 
-void PaletteGenerator::calculateContrastBounds()
+void PaletteGenerator::calculateSearchDirection()
 {
 
     if (colorOKLCH.l >= backgroundColorOKLCH.l)
     {
-        minContrastBound = backgroundColorOKLCH.l;
-        maxContrastBound = 1.0;
         searchTowardsLight = true;
     }
     else
     {
-        minContrastBound = 0.0;
-        maxContrastBound = backgroundColorOKLCH.l;
         searchTowardsLight = false;
     }
 }
 
 Color::SRGB8 PaletteGenerator::findColorForContrast(const double& targetContrast)
 {
-    double low = minContrastBound;
-    double high = maxContrastBound;
+    double low = 0.0;
+    double high = 1.0;
 
     const double targetChroma = colorOKLCH.c;
     const double targetHue = colorOKLCH.h;
 
-    Color::OKLCH bestFit = colorOKLCH;
+    Color::OKLCH bestColorFound = colorOKLCH;
 
-    for (int i = 0; i < 100000; i++)
+    double minDiff = 1000.0;
+
+    for (int i = 0; i < 1000; i++)
     {
         double mid = low + (high - low) * 0.5;
 
-        bestFit.l = mid;
+        Color::OKLCH candidate{mid, targetChroma, targetHue};
 
-        Color::Utils::fitInGamut(bestFit);
+        Color::Utils::fitInGamut(candidate);
 
-        Color::SRGB8 bestFitSRGB8 = Color::Conversion::toSRGB8(bestFit);
+        Color::SRGB8 candidateSRGB = Color::Conversion::toSRGB8(candidate);
+        double currentContrast = std::abs(Color::APCA::getContrast(candidateSRGB, backgroundColor));
 
-        double currentContrast = std::abs(Color::APCA::getContrast(bestFitSRGB8, backgroundColor));
+        double diff = std::abs(currentContrast - targetContrast);
 
-        bestFit.c = targetChroma;
-        bestFit.h = targetHue;
+        if (diff < minDiff)
+        {
+            minDiff = diff;
+            bestColorFound = candidate;
+        }
 
         if (currentContrast < targetContrast)
         {
             if (searchTowardsLight)
-            {
                 low = mid;
-            }
             else
-            {
                 high = mid;
-            }
         }
         else
         {
             if (searchTowardsLight)
-            {
                 high = mid;
-            }
             else
-            {
                 low = mid;
-            }
         }
+
+        if (minDiff < 0.001)
+            break;
     }
 
-    Color::Utils::fitInGamut(bestFit);
-
-    return Color::Conversion::toSRGB8(bestFit);
+    return Color::Conversion::toSRGB8(bestColorFound);
 }
 
 std::vector<Color::SRGB8> PaletteGenerator::generatePalette()
