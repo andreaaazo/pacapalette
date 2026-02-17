@@ -47,6 +47,10 @@ double getContrast(const SRGB8& color, const SRGB8& backgroundColor)
     double YsBackgroundColor = Conversion::toYs(backgroundColor);
     double Ytxt = Fsc(YsColor);
     double Ybg = Fsc(YsBackgroundColor);
+
+    if (std::abs(Ybg - Ytxt) < DeltaYmin)
+        return 0.0;
+
     double Cw = calcCw(Ybg, Ytxt);
 
     return calcSapc(Cw) * 100.0;

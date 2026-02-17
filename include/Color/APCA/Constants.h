@@ -10,6 +10,7 @@ inline constexpr double Bthrsh = 0.022;
 inline constexpr double Wscale = 1.14;
 inline constexpr double Woffset = 0.027;
 inline constexpr double Wclamp = 0.1;
+inline constexpr double DeltaYmin = 0.0005;
 
 inline constexpr double LumScreenR = 0.2126729;
 inline constexpr double LumScreenG = 0.7151522;
