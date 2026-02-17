@@ -1,16 +1,16 @@
 #include "Color/Utils/isInGamut.h"
-#include "Color/Conversion/toLinearSRGB.h"
+#include "Color/Conversion/toRawLinearSRGB.h"
 
 namespace Color::Utils
 {
 
 bool isInGamut(const OKLCH& color)
 {
-    LinearSRGB colorLinearSRGB = Conversion::toLinearSRGB(color);
+    RawLinearSRGB colorRawLinearSRGB = Conversion::toRawLinearSRGB(color);
 
-    return (colorLinearSRGB.r >= 0.0 && colorLinearSRGB.r <= 1.0) &&
-           (colorLinearSRGB.g >= 0.0 && colorLinearSRGB.g <= 1.0) &&
-           (colorLinearSRGB.b >= 0.0 && colorLinearSRGB.b <= 1.0);
+    return (colorRawLinearSRGB.r >= 0.0 && colorRawLinearSRGB.r <= 1.0) &&
+           (colorRawLinearSRGB.g >= 0.0 && colorRawLinearSRGB.g <= 1.0) &&
+           (colorRawLinearSRGB.b >= 0.0 && colorRawLinearSRGB.b <= 1.0);
 }
 
 } // namespace Color::Utils

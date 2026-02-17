@@ -1,5 +1,9 @@
 #include "Color/Utils/fitInGamut.h"
+#include "Color/Conversion/toLinearSRGB.h"
+#include "Color/Conversion/toRawLinearSRGB.h"
+#include "Color/RawLinearSRGB.h"
 #include "Color/Utils/isInGamut.h"
+#include <iostream>
 
 namespace Color::Utils
 {
@@ -13,15 +17,16 @@ void fitInGamut(OKLCH& color)
 
     double low = 0.0;
     double high = color.c;
-    OKLCH targetColor = color;
 
-    for (int i = 0; i < 100; i++)
+    constexpr double EPSILON = 0.000000001;
+
+    while ((high - low) > EPSILON)
     {
 
         double mid = low + (high - low) / 2.0;
-        targetColor.c = mid;
+        color.c = mid;
 
-        if (isInGamut(targetColor))
+        if (isInGamut(color))
         {
             low = mid;
         }
@@ -30,6 +35,8 @@ void fitInGamut(OKLCH& color)
             high = mid;
         }
     }
+
+    color.c = low;
 }
 
 } // namespace Color::Utils

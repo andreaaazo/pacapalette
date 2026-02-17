@@ -60,7 +60,6 @@ endif()
 # Find source files
 # ---------------------
 file(GLOB_RECURSE LIB_SOURCES "src/*.cpp")
-list(FILTER LIB_SOURCES EXCLUDE REGEX "src/main.cpp")
 
 # ---------------------
 # Add Library
@@ -75,7 +74,3 @@ target_include_directories(
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
-
-add_executable(Playground src/main.cpp)
-
-target_link_libraries(Playground PRIVATE ${PROJECT_NAME})

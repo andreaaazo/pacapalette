@@ -52,7 +52,7 @@ Color::SRGB8 PaletteGenerator::findColorForContrast(const double& targetContrast
 
     Color::OKLCH bestFit = colorOKLCH;
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 100000; i++)
     {
         double mid = low + (high - low) * 0.5;
 
@@ -63,6 +63,7 @@ Color::SRGB8 PaletteGenerator::findColorForContrast(const double& targetContrast
         Color::SRGB8 bestFitSRGB8 = Color::Conversion::toSRGB8(bestFit);
 
         double currentContrast = std::abs(Color::APCA::getContrast(bestFitSRGB8, backgroundColor));
+
         bestFit.c = targetChroma;
         bestFit.h = targetHue;
 
