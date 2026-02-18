@@ -1,3 +1,6 @@
 # Build directory
 /build/
 build/
+
+# Mac stuff
+.DS_Store
